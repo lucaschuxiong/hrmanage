@@ -27,16 +27,21 @@ module.exports = {
   publicPath: '/',
   outputDir: 'dist',
   assetsDir: 'static',
-  lintOnSave: process.env.NODE_ENV === 'development',
+  lintOnSave: false,//process.env.NODE_ENV === 'development',
   productionSourceMap: false,
   devServer: {
     port: port,
     open: true,
     overlay: {
       warnings: false,
-      errors: true
+      errors: false
     },
-    before: require('./mock/mock-server.js')
+    proxy: {
+      '/api': {
+        target: 'https://heimahr.itheima.net'
+      }
+    }
+    // before: require('./mock/mock-server.js')
   },
   configureWebpack: {
     // provide the app's title in webpack's name field, so that
